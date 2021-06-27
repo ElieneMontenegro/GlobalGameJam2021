@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 {
 
     //running
-    private bool facingRight = true;
     public float speed;
+    private bool facingRight = true;
+    private Vector3 scale;
 
     //jumping
     public float jumpForce;
@@ -26,10 +27,10 @@ public class PlayerController : MonoBehaviour
     //climbable Stuff
     bool onClimbable = false;
     bool isClimbing = false;
+    private bool canClimb;
     float climbPercentage;
     float ClimbingSpeed = 1f;
     Vector2 vectorStart, vectorEnd; //Starting and Ending Point of the Climbable
-    bool canClimb = false;
 
     //pontos
     public int pontos;
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
                 Flip();
             }
             anim.SetBool("isRunning", true);
+
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
             transform.position += movement * Time.deltaTime * speed;
         }
@@ -71,9 +73,10 @@ public class PlayerController : MonoBehaviour
             {
                 Flip();
             }
+            anim.SetBool("isRunning", true);
+
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
             transform.position += movement * Time.deltaTime * speed;
-            anim.SetBool("isRunning", true);
         }
         else
         {
@@ -86,9 +89,9 @@ public class PlayerController : MonoBehaviour
     {
         facingRight = !facingRight;
         
-        Vector3 scala = transform.localScale;
-        scala.x *= -1;
-        transform.localScale = scala;
+        scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
 
     }
 
